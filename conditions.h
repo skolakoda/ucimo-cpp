@@ -1,0 +1,6 @@
+#ifndef CONTIDIONS_H_INCLUDED
+#define CONTIDIONS_H_INCLUDED
+
+void conditions();
+
+#endif // CONTIDIONS_H_INCLUDED
