@@ -9,3 +9,7 @@ http://wiki.codeblocks.org/index.php/Creating_a_new_project
 ## Uputstvo
 
 Ceo direktorijum otvoriti u Code Blocks editoru i odatle ka kompajlirati i pokrenuti.
+
+## TODO
+
+Integrisati sizeof.cpp u projekat
