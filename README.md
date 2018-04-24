@@ -8,8 +8,10 @@ http://wiki.codeblocks.org/index.php/Creating_a_new_project
 
 ## Uputstvo
 
-Ceo direktorijum otvoriti u Code Blocks editoru i odatle ka kompajlirati i pokrenuti.
+Kompajliranje C++ na Linuxu:
 
-## TODO
+```
+g++ uslovi.cpp
+```
 
-Integrisati sizeof.cpp u projekat
+Mini projekat otvoriti u Code Blocks editoru i odatle ga kompajlirati i pokrenuti.
