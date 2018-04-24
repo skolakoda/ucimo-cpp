@@ -25,7 +25,7 @@ g++ zdravo.cpp -o zdravo
 
 ## Code Blocks
 
-Mini projekat otvoriti u Code Blocks editoru i odatle ga kompajlirati i pokrenuti.
+Mini projekat koji se nalazi u repozitoriju otvoriti u Code Blocks editoru i odatle ga kompajlirati i pokrenuti.
 
-Pravljenje C++ projekta u Code Blocks editoru:
+Uputstvo za pravljenje C++ projekta u Code Blocks editoru:
 http://wiki.codeblocks.org/index.php/Creating_a_new_project
