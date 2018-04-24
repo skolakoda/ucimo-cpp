@@ -5,13 +5,13 @@ https://www.sololearn.com/Play/CPlusPlus
 
 ## Kompajliranje
 
-Kompajliranje C++ na Linuxu:
+Kompajliranje C++ fajla na Linuxu:
 
 ```
 g++ zdravo.cpp
 ```
 
-To će napraviti fajl `a.out` koji pokrećemo na sledeći način:
+To će napraviti izvršni fajl `a.out` koji pokrećemo na sledeći način:
 
 ```
 ./a.out
