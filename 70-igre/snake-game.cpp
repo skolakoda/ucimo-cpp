@@ -12,17 +12,21 @@ void praviHranu();
 char dajKarakter(int value);
 
 enum class Smer { levo, desno, gore, dole };
+const int ZID = -1;
+const int HRANA = -2;
+const int PRAZNO = 0;
+const int ZMIJA = 1; // ne moze enum jer se povecava broj
 
 const int VISINA_MAPE = 20;
 const int SIRINA_MAPE = 30;
 const int VELICINA = VISINA_MAPE * SIRINA_MAPE;
 
+Smer smer;
 int mapa[VELICINA];
 int glava_x;
 int glava_y;
-Smer smer;
 int duzina_zmije = 3;
-bool igra_ide;
+bool igra_ide = true;
 
 int main()
 {
@@ -33,15 +37,11 @@ int main()
 void game()
 {
     initMap();
-    igra_ide = true;
     while (igra_ide) {
-        if (kbhit()) // key pressed
-            promeniSmer(getch());
-
+        if (kbhit()) promeniSmer(getch());
         azurirajZmiju();
         system("cls");
         crtajMapu();
-
         _sleep(200);
     }
     std::cout << "\t\t!!!Game over!" << std::endl << "\t\tYour score is: " << duzina_zmije;
@@ -69,27 +69,26 @@ void mrdajZmiju(int dx, int dy) {
     int novi_x = glava_x + dx;
     int novi_y = glava_y + dy;
 
-    if (mapa[novi_x + novi_y * VISINA_MAPE] == -2) {
+    if (mapa[novi_x + novi_y * VISINA_MAPE] == HRANA) {
         duzina_zmije++;
         praviHranu();
-    } else if (mapa[novi_x + novi_y * VISINA_MAPE] != 0) {
+    } else if (mapa[novi_x + novi_y * VISINA_MAPE] != PRAZNO) {
         igra_ide = false;
     }
 
     glava_x = novi_x;
     glava_y = novi_y;
-    mapa[glava_x + glava_y * VISINA_MAPE] = duzina_zmije + 1;
+    mapa[glava_x + glava_y * VISINA_MAPE] = duzina_zmije + 1;   // povecavanje broja zmiji
 }
 
 void praviHranu() {
-    int x = 0;
-    int y = 0;
+    int x;
+    int y;
     do {
         x = rand() % (VISINA_MAPE - 2) + 1;
         y = rand() % (SIRINA_MAPE - 2) + 1;
-    // If location is not free try again
-    } while (mapa[x + y * VISINA_MAPE] != 0);
-    mapa[x + y * VISINA_MAPE] = -2; // food
+    } while (mapa[x + y * VISINA_MAPE] != PRAZNO);
+    mapa[x + y * VISINA_MAPE] = HRANA;
 }
 
 void azurirajZmiju() {
@@ -103,9 +102,8 @@ void azurirajZmiju() {
         case Smer::levo: mrdajZmiju(0, -1);
             break;
     }
-
     for (int i = 0; i < VELICINA; i++) {
-        if (mapa[i] > 0) mapa[i]--;
+        if (mapa[i] >= ZMIJA) mapa[i]--;   // oduzimanje broja zmiji
     }
 }
 
@@ -113,16 +111,14 @@ void initMap()
 {
     glava_x = VISINA_MAPE / 2;
     glava_y = SIRINA_MAPE / 2;
-    mapa[glava_x + glava_y * VISINA_MAPE] = 1;
-    // top and bottom walls
+    mapa[glava_x + glava_y * VISINA_MAPE] = ZMIJA;
     for (int x = 0; x < VISINA_MAPE; ++x) {
-        mapa[x] = -1;
-        mapa[x + (SIRINA_MAPE - 1) * VISINA_MAPE] = -1;
+        mapa[x] = ZID;
+        mapa[x + (SIRINA_MAPE - 1) * VISINA_MAPE] = ZID;
     }
-    // left and right walls
     for (int y = 0; y < SIRINA_MAPE; y++) {
-        mapa[0 + y * VISINA_MAPE] = -1;
-        mapa[(VISINA_MAPE - 1) + y * VISINA_MAPE] = -1;
+        mapa[0 + y * VISINA_MAPE] = ZID;
+        mapa[(VISINA_MAPE - 1) + y * VISINA_MAPE] = ZID;
     }
     praviHranu();
 }
@@ -139,9 +135,10 @@ void crtajMapu()
 
 char dajKarakter(int value)
 {
-    if (value > 0) return 'o';  // telo zmije
     switch (value) {
-        case -1: return 'X'; // zid
-        case -2: return 'O'; // hrana
+        case ZID: return 'X';
+        case HRANA: return 'O';
+        case PRAZNO: return ' ';
+        default: return 'o'; // zmija
     }
 }
