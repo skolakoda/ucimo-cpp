@@ -11,6 +11,8 @@ void promeniSmer(char key);
 void praviHranu();
 char dajKarakter(int value);
 
+enum class Smer { levo, desno, gore, dole };
+
 const int VISINA_MAPE = 20;
 const int SIRINA_MAPE = 30;
 const int VELICINA = VISINA_MAPE * SIRINA_MAPE;
@@ -18,7 +20,7 @@ const int VELICINA = VISINA_MAPE * SIRINA_MAPE;
 int mapa[VELICINA];
 int glava_x;
 int glava_y;
-int smer;
+Smer smer;
 int duzina_zmije = 3;
 bool igra_ide;
 
@@ -49,16 +51,16 @@ void game()
 void promeniSmer(char key) {
     switch (key) {
     case 'w':
-        if (smer != 2) smer = 0;
+        if (smer != Smer::dole) smer = Smer::gore;
         break;
     case 'd':
-        if (smer != 3) smer = 1;
+        if (smer != Smer::levo) smer = Smer::desno;
         break;
     case 's':
-        if (smer != 4) smer = 2;
+        if (smer != Smer::gore) smer = Smer::dole;
         break;
     case 'a':
-        if (smer != 5) smer = 3;
+        if (smer != Smer::desno) smer = Smer::levo;
         break;
     }
 }
@@ -92,13 +94,13 @@ void praviHranu() {
 
 void azurirajZmiju() {
     switch (smer) {
-        case 0: mrdajZmiju(-1, 0);
+        case Smer::gore: mrdajZmiju(-1, 0);
             break;
-        case 1: mrdajZmiju(0, 1);
+        case Smer::desno: mrdajZmiju(0, 1);
             break;
-        case 2: mrdajZmiju(1, 0);
+        case Smer::dole: mrdajZmiju(1, 0);
             break;
-        case 3: mrdajZmiju(0, -1);
+        case Smer::levo: mrdajZmiju(0, -1);
             break;
     }
 
