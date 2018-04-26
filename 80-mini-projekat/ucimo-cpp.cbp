@@ -32,10 +32,10 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="conditions.cpp" />
-		<Unit filename="contidions.h" />
-		<Unit filename="hello.cpp" />
-		<Unit filename="hello.h" />
+		<Unit filename="Junak.cpp" />
+		<Unit filename="Junak.h" />
+		<Unit filename="proveriStarost.h" />
+		<Unit filename="proveriStarost.cpp" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />

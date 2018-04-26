@@ -1,9 +1,15 @@
-#include "hello.h"
-#include "conditions.h"
+#include "proveriStarost.h"
+#include "Junak.h"
 
 int main()
 {
-    hello();
-    conditions();
+    Junak igrac;
+    igrac.unesiIme();
+    igrac.unesiGodine();
+    igrac.unesiKlasu();
+    igrac.predstaviSe();
+
+    proveriStarost(igrac.godine);
+
     return 0;
 }
