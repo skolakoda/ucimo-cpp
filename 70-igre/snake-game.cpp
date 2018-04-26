@@ -1,217 +1,145 @@
+// https://codereview.stackexchange.com/questions/66481/snake-game-in-c
 #include <iostream>
 #include <conio.h>
 
-void run();
-void printMap();
+void game();
 void initMap();
-void move(int dx, int dy);
-void update();
-void changeDirection(char key);
-void clearScreen();
-void generateFood();
+void crtajMapu();
+void mrdajZmiju(int dx, int dy);
+void azurirajZmiju();
+void promeniSmer(char key);
+void praviHranu();
+char dajKarakter(int value);
 
-char getMapValue(int value);
+const int VISINA_MAPE = 20;
+const int SIRINA_MAPE = 30;
+const int VELICINA = VISINA_MAPE * SIRINA_MAPE;
 
-const int mapwidth = 20;
-const int mapheight = 20;
-
-const int size = mapwidth * mapheight;
-
-// The tile values for the map
-int map[size];
-
-// Snake head details
-int headxpos;
-int headypos;
-int direction;
-
-// Amount of food the snake has (How long the body is)
-int food = 3;
-
-// Determine if game is running
-bool running;
+int mapa[VELICINA];
+int glava_x;
+int glava_y;
+int smer;
+int duzina_zmije = 3;
+bool igra_ide;
 
 int main()
 {
-    run();
+    game();
     return 0;
 }
 
-// Main game function
-void run()
+void game()
 {
-    // Initialize the map
     initMap();
-    running = true;
-    while (running) {
-        // If a key is pressed
-        if (kbhit()) {
-            // Change to direction determined by key pressed
-            changeDirection(getch());
-        }
-        // Upate the map
-        update();
+    igra_ide = true;
+    while (igra_ide) {
+        if (kbhit()) // key pressed
+            promeniSmer(getch());
 
-        // Clear the screen
-        clearScreen();
+        azurirajZmiju();
+        system("cls");
+        crtajMapu();
 
-        // Print the map
-        printMap();
-
-        // wait 0.5 seconds
-        _sleep(500);
+        _sleep(200);
     }
-
-    // Print out game over text
-    std::cout << "\t\t!!!Game over!" << std::endl << "\t\tYour score is: " << food;
-
-    // Stop console from closing instantly
-    std::cin.ignore();
+    std::cout << "\t\t!!!Game over!" << std::endl << "\t\tYour score is: " << duzina_zmije;
+    std::cin.ignore(); // stop console from closing instantly
 }
 
-// Changes snake direction from input
-void changeDirection(char key) {
-    /*
-      W
-    A + D
-      S
-
-      1
-    4 + 2
-      3
-    */
+void promeniSmer(char key) {
     switch (key) {
     case 'w':
-        if (direction != 2) direction = 0;
+        if (smer != 2) smer = 0;
         break;
     case 'd':
-        if (direction != 3) direction = 1;
+        if (smer != 3) smer = 1;
         break;
     case 's':
-        if (direction != 4) direction = 2;
+        if (smer != 4) smer = 2;
         break;
     case 'a':
-        if (direction != 5) direction = 3;
+        if (smer != 5) smer = 3;
         break;
     }
 }
 
-// Moves snake head to new location
-void move(int dx, int dy) {
-    // determine new head position
-    int newx = headxpos + dx;
-    int newy = headypos + dy;
+void mrdajZmiju(int dx, int dy) {
+    int novi_x = glava_x + dx;
+    int novi_y = glava_y + dy;
 
-    // Check if there is food at location
-    if (map[newx + newy * mapwidth] == -2) {
-        // Increase food value (body length)
-        food++;
-
-        // Generate new food on map
-        generateFood();
+    if (mapa[novi_x + novi_y * VISINA_MAPE] == -2) {
+        duzina_zmije++;
+        praviHranu();
+    } else if (mapa[novi_x + novi_y * VISINA_MAPE] != 0) {
+        igra_ide = false;
     }
 
-    // Check location is free
-    else if (map[newx + newy * mapwidth] != 0) {
-        running = false;
-    }
-
-    // Move head to new location
-    headxpos = newx;
-    headypos = newy;
-    map[headxpos + headypos * mapwidth] = food + 1;
-
+    glava_x = novi_x;
+    glava_y = novi_y;
+    mapa[glava_x + glava_y * VISINA_MAPE] = duzina_zmije + 1;
 }
 
-// Clears screen
-void clearScreen() {
-    // Clear the screen
-    system("cls");
-}
-
-// Generates new food on map
-void generateFood() {
+void praviHranu() {
     int x = 0;
     int y = 0;
     do {
-        // Generate random x and y values within the map
-        x = rand() % (mapwidth - 2) + 1;
-        y = rand() % (mapheight - 2) + 1;
-
-        // If location is not free try again
-    } while (map[x + y * mapwidth] != 0);
-
-    // Place new food
-    map[x + y * mapwidth] = -2;
+        x = rand() % (VISINA_MAPE - 2) + 1;
+        y = rand() % (SIRINA_MAPE - 2) + 1;
+    // If location is not free try again
+    } while (mapa[x + y * VISINA_MAPE] != 0);
+    mapa[x + y * VISINA_MAPE] = -2; // food
 }
 
-// Updates the map
-void update() {
-    // Move in direction indicated
-    switch (direction) {
-    case 0: move(-1, 0);
-        break;
-    case 1: move(0, 1);
-        break;
-    case 2: move(1, 0);
-        break;
-    case 3: move(0, -1);
-        break;
+void azurirajZmiju() {
+    switch (smer) {
+        case 0: mrdajZmiju(-1, 0);
+            break;
+        case 1: mrdajZmiju(0, 1);
+            break;
+        case 2: mrdajZmiju(1, 0);
+            break;
+        case 3: mrdajZmiju(0, -1);
+            break;
     }
 
-    // Reduce snake values on map by 1
-    for (int i = 0; i < size; i++) {
-        if (map[i] > 0) map[i]--;
+    for (int i = 0; i < VELICINA; i++) {
+        if (mapa[i] > 0) mapa[i]--;
     }
 }
 
-// Initializes map
 void initMap()
 {
-    // Places the initual head location in middle of map
-    headxpos = mapwidth / 2;
-    headypos = mapheight / 2;
-    map[headxpos + headypos * mapwidth] = 1;
-
-    // Places top and bottom walls
-    for (int x = 0; x < mapwidth; ++x) {
-        map[x] = -1;
-        map[x + (mapheight - 1) * mapwidth] = -1;
+    glava_x = VISINA_MAPE / 2;
+    glava_y = SIRINA_MAPE / 2;
+    mapa[glava_x + glava_y * VISINA_MAPE] = 1;
+    // top and bottom walls
+    for (int x = 0; x < VISINA_MAPE; ++x) {
+        mapa[x] = -1;
+        mapa[x + (SIRINA_MAPE - 1) * VISINA_MAPE] = -1;
     }
-
-    // Places left and right walls
-    for (int y = 0; y < mapheight; y++) {
-        map[0 + y * mapwidth] = -1;
-        map[(mapwidth - 1) + y * mapwidth] = -1;
+    // left and right walls
+    for (int y = 0; y < SIRINA_MAPE; y++) {
+        mapa[0 + y * VISINA_MAPE] = -1;
+        mapa[(VISINA_MAPE - 1) + y * VISINA_MAPE] = -1;
     }
-
-    // Generates first food
-    generateFood();
+    praviHranu();
 }
 
-// Prints the map to console
-void printMap()
+void crtajMapu()
 {
-    for (int x = 0; x < mapwidth; ++x) {
-        for (int y = 0; y < mapheight; ++y) {
-            // Prints the value at current x,y location
-            std::cout << getMapValue(map[x + y * mapwidth]);
+    for (int x = 0; x < VISINA_MAPE; ++x) {
+        for (int y = 0; y < SIRINA_MAPE; ++y) {
+            std::cout << dajKarakter(mapa[x + y * VISINA_MAPE]);
         }
-        // Ends the line for next x value
         std::cout << std::endl;
     }
 }
 
-// Returns graphical character for display from map value
-char getMapValue(int value)
+char dajKarakter(int value)
 {
-    // Returns a part of snake body
-    if (value > 0) return 'o';
-
+    if (value > 0) return 'o';  // telo zmije
     switch (value) {
-        // Return wall
-    case -1: return 'X';
-        // Return food
-    case -2: return 'O';
+        case -1: return 'X'; // zid
+        case -2: return 'O'; // hrana
     }
 }
