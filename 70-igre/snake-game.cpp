@@ -28,14 +28,12 @@ int glava_y;
 int duzina_zmije = 3;
 bool igra_ide = true;
 
-int main()
-{
+int main() {
     game();
     return 0;
 }
 
-void game()
-{
+void game() {
     initMap();
     while (igra_ide) {
         if (kbhit()) promeniSmer(getch());
@@ -107,8 +105,7 @@ void azurirajZmiju() {
     }
 }
 
-void initMap()
-{
+void initMap() {
     glava_x = VISINA_MAPE / 2;
     glava_y = SIRINA_MAPE / 2;
     mapa[glava_x + glava_y * VISINA_MAPE] = ZMIJA;
@@ -123,8 +120,7 @@ void initMap()
     praviHranu();
 }
 
-void crtaj()
-{
+void crtaj() {
     for (int x = 0; x < VISINA_MAPE; ++x) {
         for (int y = 0; y < SIRINA_MAPE; ++y) {
             std::cout << dajKarakter(mapa[x + y * VISINA_MAPE]);
@@ -133,8 +129,7 @@ void crtaj()
     }
 }
 
-char dajKarakter(int value)
-{
+char dajKarakter(int value) {
     switch (value) {
         case ZID: return 'X';
         case HRANA: return 'O';
