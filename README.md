@@ -29,3 +29,9 @@ Mini projekat koji se nalazi u repozitoriju otvoriti u Code Blocks editoru i oda
 
 Uputstvo za pravljenje C++ projekta u Code Blocks editoru:
 http://wiki.codeblocks.org/index.php/Creating_a_new_project
+
+## Linkovi
+
+https://www.codemiles.com/c-opengl-examples/
+
+http://cplusplus.happycodings.com/games/
