@@ -4,7 +4,7 @@
 
 void game();
 void initMap();
-void crtajMapu();
+void crtaj();
 void mrdajZmiju(int dx, int dy);
 void azurirajZmiju();
 void promeniSmer(char key);
@@ -41,7 +41,7 @@ void game()
         if (kbhit()) promeniSmer(getch());
         azurirajZmiju();
         system("cls");
-        crtajMapu();
+        crtaj();
         _sleep(200);
     }
     std::cout << "\t\t!!!Game over!" << std::endl << "\t\tYour score is: " << duzina_zmije;
@@ -123,7 +123,7 @@ void initMap()
     praviHranu();
 }
 
-void crtajMapu()
+void crtaj()
 {
     for (int x = 0; x < VISINA_MAPE; ++x) {
         for (int y = 0; y < SIRINA_MAPE; ++y) {
