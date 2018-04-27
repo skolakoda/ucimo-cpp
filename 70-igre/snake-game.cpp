@@ -2,82 +2,51 @@
 #include <iostream>
 #include <conio.h>
 
-void game();
-void initMap();
-void crtaj();
-void mrdajZmiju(int dx, int dy);
-void azurirajZmiju();
-void promeniSmer(char key);
-void praviHranu();
-char dajKarakter(int value);
+enum Smer { levo, desno, gore, dole };
 
-enum class Smer { levo, desno, gore, dole };
+class Zmija {
+  public:
+    int x;
+    int y;
+    int duzina;
+    Smer smer;
+
+    Zmija(int a, int b, int c) {
+        x = a;
+        y = b;
+        duzina = c;
+    }
+    
+    void promeniSmer(char key) {
+        switch (key) {
+            case 'w':
+                if (smer != Smer::dole) smer = Smer::gore;
+                break;
+            case 'd':
+                if (smer != Smer::levo) smer = Smer::desno;
+                break;
+            case 's':
+                if (smer != Smer::gore) smer = Smer::dole;
+                break;
+            case 'a':
+                if (smer != Smer::desno) smer = Smer::levo;
+                break;
+        }
+    }
+};
+
 const int ZID = -1;
 const int HRANA = -2;
 const int PRAZNO = 0;
-const int ZMIJA = 1; // ne moze enum jer se povecava broj
+const int TELO = 1; // ne moze enum jer se povecava broj
 
 const int VISINA_MAPE = 20;
 const int SIRINA_MAPE = 30;
-const int VELICINA = VISINA_MAPE * SIRINA_MAPE;
+const int VELICINA_MAPE = VISINA_MAPE * SIRINA_MAPE;
 
-Smer smer;
-int mapa[VELICINA];
-int glava_x;
-int glava_y;
-int duzina_zmije = 3;
+int mapa[VELICINA_MAPE];
 bool igra_ide = true;
-
-int main() {
-    game();
-    return 0;
-}
-
-void game() {
-    initMap();
-    while (igra_ide) {
-        if (kbhit()) promeniSmer(getch());
-        azurirajZmiju();
-        system("cls");
-        crtaj();
-        _sleep(200);
-    }
-    std::cout << "\t\t!!!Game over!" << std::endl << "\t\tYour score is: " << duzina_zmije;
-    std::cin.ignore(); // stop console from closing instantly
-}
-
-void promeniSmer(char key) {
-    switch (key) {
-    case 'w':
-        if (smer != Smer::dole) smer = Smer::gore;
-        break;
-    case 'd':
-        if (smer != Smer::levo) smer = Smer::desno;
-        break;
-    case 's':
-        if (smer != Smer::gore) smer = Smer::dole;
-        break;
-    case 'a':
-        if (smer != Smer::desno) smer = Smer::levo;
-        break;
-    }
-}
-
-void mrdajZmiju(int dx, int dy) {
-    int novi_x = glava_x + dx;
-    int novi_y = glava_y + dy;
-
-    if (mapa[novi_x + novi_y * VISINA_MAPE] == HRANA) {
-        duzina_zmije++;
-        praviHranu();
-    } else if (mapa[novi_x + novi_y * VISINA_MAPE] != PRAZNO) {
-        igra_ide = false;
-    }
-
-    glava_x = novi_x;
-    glava_y = novi_y;
-    mapa[glava_x + glava_y * VISINA_MAPE] = duzina_zmije + 1;   // povecavanje broja zmiji
-}
+Zmija zmija(VISINA_MAPE / 2, SIRINA_MAPE / 2, 3);
 
 void praviHranu() {
     int x;
@@ -89,26 +58,8 @@ void praviHranu() {
     mapa[x + y * VISINA_MAPE] = HRANA;
 }
 
-void azurirajZmiju() {
-    switch (smer) {
-        case Smer::gore: mrdajZmiju(-1, 0);
-            break;
-        case Smer::desno: mrdajZmiju(0, 1);
-            break;
-        case Smer::dole: mrdajZmiju(1, 0);
-            break;
-        case Smer::levo: mrdajZmiju(0, -1);
-            break;
-    }
-    for (int i = 0; i < VELICINA; i++) {
-        if (mapa[i] >= ZMIJA) mapa[i]--;   // oduzimanje broja zmiji
-    }
-}
-
 void initMap() {
-    glava_x = VISINA_MAPE / 2;
-    glava_y = SIRINA_MAPE / 2;
-    mapa[glava_x + glava_y * VISINA_MAPE] = ZMIJA;
+    mapa[zmija.x + zmija.y * VISINA_MAPE] = TELO;
     for (int x = 0; x < VISINA_MAPE; ++x) {
         mapa[x] = ZID;
         mapa[x + (SIRINA_MAPE - 1) * VISINA_MAPE] = ZID;
@@ -120,6 +71,15 @@ void initMap() {
     praviHranu();
 }
 
+char dajKarakter(int value) {
+    switch (value) {
+        case ZID: return 'X';
+        case HRANA: return 'O';
+        case PRAZNO: return ' ';
+        default: return 'o'; // telo zmije
+    }
+}
+
 void crtaj() {
     for (int x = 0; x < VISINA_MAPE; ++x) {
         for (int y = 0; y < SIRINA_MAPE; ++y) {
@@ -129,11 +89,51 @@ void crtaj() {
     }
 }
 
-char dajKarakter(int value) {
-    switch (value) {
-        case ZID: return 'X';
-        case HRANA: return 'O';
-        case PRAZNO: return ' ';
-        default: return 'o'; // zmija
+void mrdajZmiju(int dx, int dy) {
+    int novi_x = zmija.x + dx;
+    int novi_y = zmija.y + dy;
+
+    if (mapa[novi_x + novi_y * VISINA_MAPE] == HRANA) {
+        zmija.duzina++;
+        praviHranu();
+    } else if (mapa[novi_x + novi_y * VISINA_MAPE] != PRAZNO) {
+        igra_ide = false;
     }
+
+    zmija.x = novi_x;
+    zmija.y = novi_y;
+    mapa[zmija.x + zmija.y * VISINA_MAPE] = zmija.duzina + 1;   // povecavanje broja zmiji
+}
+
+void azurirajZmiju() {
+    switch (zmija.smer) {
+        case Smer::gore: mrdajZmiju(-1, 0);
+            break;
+        case Smer::desno: mrdajZmiju(0, 1);
+            break;
+        case Smer::dole: mrdajZmiju(1, 0);
+            break;
+        case Smer::levo: mrdajZmiju(0, -1);
+            break;
+    }
+    for (int i = 0; i < VELICINA_MAPE; i++) {
+        if (mapa[i] >= TELO) mapa[i]--;   // oduzimanje broja zmiji
+    }
+}
+
+void game() {
+    initMap();
+    while (igra_ide) {
+        if (kbhit()) zmija.promeniSmer(getch());
+        azurirajZmiju();
+        system("cls");
+        crtaj();
+        _sleep(200);
+    }
+    std::cout << "\t\t!!!Game over!" << std::endl << "\t\tYour score is: " << zmija.duzina;
+}
+
+int main() {
+    game();
+    return 0;
 }
