@@ -2,7 +2,7 @@
 #include <iostream>
 #include <conio.h>
 
-enum Smer { levo, desno, gore, dole };
+enum Smer { LEVO, DESNO, GORE, DOLE };
 
 class Zmija {
   public:
@@ -20,16 +20,16 @@ class Zmija {
     void okreni(char key) {
         switch (key) {
             case 'w':
-                if (smer != Smer::dole) smer = Smer::gore;
+                if (smer != Smer::DOLE) smer = Smer::GORE;
                 break;
             case 'd':
-                if (smer != Smer::levo) smer = Smer::desno;
+                if (smer != Smer::LEVO) smer = Smer::DESNO;
                 break;
             case 's':
-                if (smer != Smer::gore) smer = Smer::dole;
+                if (smer != Smer::GORE) smer = Smer::DOLE;
                 break;
             case 'a':
-                if (smer != Smer::desno) smer = Smer::levo;
+                if (smer != Smer::DESNO) smer = Smer::LEVO;
                 break;
         }
     }
@@ -47,6 +47,15 @@ const int VELICINA_MAPE = VISINA_MAPE * SIRINA_MAPE;
 int mapa[VELICINA_MAPE];
 bool igra_ide = true;
 Zmija zmija(VISINA_MAPE / 2, SIRINA_MAPE / 2, 3);
+
+char dajKarakter(int value) {
+    switch (value) {
+        case ZID: return 'X';
+        case HRANA: return 'O';
+        case PRAZNO: return ' ';
+        default: return 'o'; // telo zmije mogu razni brojevi
+    }
+}
 
 void praviHranu() {
     int x;
@@ -69,15 +78,6 @@ void initMap() {
         mapa[(VISINA_MAPE - 1) + y * VISINA_MAPE] = ZID;
     }
     praviHranu();
-}
-
-char dajKarakter(int value) {
-    switch (value) {
-        case ZID: return 'X';
-        case HRANA: return 'O';
-        case PRAZNO: return ' ';
-        default: return 'o'; // telo zmije mogu razni brojevi
-    }
 }
 
 void crtaj() {
@@ -107,13 +107,13 @@ void mrdajZmiju(int dx, int dy) {
 
 void azurirajZmiju() {
     switch (zmija.smer) {
-        case Smer::gore: mrdajZmiju(-1, 0);
+        case Smer::GORE: mrdajZmiju(-1, 0);
             break;
-        case Smer::desno: mrdajZmiju(0, 1);
+        case Smer::DESNO: mrdajZmiju(0, 1);
             break;
-        case Smer::dole: mrdajZmiju(1, 0);
+        case Smer::DOLE: mrdajZmiju(1, 0);
             break;
-        case Smer::levo: mrdajZmiju(0, -1);
+        case Smer::LEVO: mrdajZmiju(0, -1);
             break;
     }
     for (int i = 0; i < VELICINA_MAPE; i++) {
