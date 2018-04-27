@@ -17,7 +17,7 @@ class Zmija {
         duzina = c;
     }
     
-    void promeniSmer(char key) {
+    void okreni(char key) {
         switch (key) {
             case 'w':
                 if (smer != Smer::dole) smer = Smer::gore;
@@ -38,7 +38,7 @@ class Zmija {
 const int ZID = -1;
 const int HRANA = -2;
 const int PRAZNO = 0;
-const int TELO = 1; // ne moze enum jer se povecava broj
+const int TELO_ZMIJE = 1; // ne moze enum jer se povecava broj
 
 const int VISINA_MAPE = 20;
 const int SIRINA_MAPE = 30;
@@ -59,7 +59,7 @@ void praviHranu() {
 }
 
 void initMap() {
-    mapa[zmija.x + zmija.y * VISINA_MAPE] = TELO;
+    mapa[zmija.x + zmija.y * VISINA_MAPE] = TELO_ZMIJE;
     for (int x = 0; x < VISINA_MAPE; ++x) {
         mapa[x] = ZID;
         mapa[x + (SIRINA_MAPE - 1) * VISINA_MAPE] = ZID;
@@ -76,7 +76,7 @@ char dajKarakter(int value) {
         case ZID: return 'X';
         case HRANA: return 'O';
         case PRAZNO: return ' ';
-        default: return 'o'; // telo zmije
+        default: return 'o'; // telo zmije mogu razni brojevi
     }
 }
 
@@ -90,18 +90,18 @@ void crtaj() {
 }
 
 void mrdajZmiju(int dx, int dy) {
-    int novi_x = zmija.x + dx;
-    int novi_y = zmija.y + dy;
+    int x = zmija.x + dx;
+    int y = zmija.y + dy;
 
-    if (mapa[novi_x + novi_y * VISINA_MAPE] == HRANA) {
+    if (mapa[x + y * VISINA_MAPE] == HRANA) {
         zmija.duzina++;
         praviHranu();
-    } else if (mapa[novi_x + novi_y * VISINA_MAPE] != PRAZNO) {
+    } else if (mapa[x + y * VISINA_MAPE] != PRAZNO) {
         igra_ide = false;
     }
 
-    zmija.x = novi_x;
-    zmija.y = novi_y;
+    zmija.x = x;
+    zmija.y = y;
     mapa[zmija.x + zmija.y * VISINA_MAPE] = zmija.duzina + 1;   // povecavanje broja zmiji
 }
 
@@ -117,23 +117,19 @@ void azurirajZmiju() {
             break;
     }
     for (int i = 0; i < VELICINA_MAPE; i++) {
-        if (mapa[i] >= TELO) mapa[i]--;   // oduzimanje broja zmiji
+        if (mapa[i] >= TELO_ZMIJE) mapa[i]--;   // oduzimanje broja zmiji
     }
 }
 
-void game() {
+int main() {
     initMap();
     while (igra_ide) {
-        if (kbhit()) zmija.promeniSmer(getch());
+        if (kbhit()) zmija.okreni(getch());
         azurirajZmiju();
         system("cls");
         crtaj();
         _sleep(200);
     }
     std::cout << "\t\t!!!Game over!" << std::endl << "\t\tYour score is: " << zmija.duzina;
-}
-
-int main() {
-    game();
     return 0;
 }
