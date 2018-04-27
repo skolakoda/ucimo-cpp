@@ -50,8 +50,28 @@ struct Mapa {
         return polja[x + y * visina];
     }
 
-    void postaviPolje(int x, int y, int vrednost) {
+    void staviPolje(int x, int y, int vrednost) {
         polja[x + y * visina] = vrednost;
+    }
+
+    void praviZidove() {
+        for (int i = 0; i < visina; ++i) {
+            polja[i] = ZID;
+            staviPolje(i, sirina - 1, ZID);
+        }
+        for (int j = 0; j < sirina; j++) {
+            staviPolje(0, j, ZID);
+            staviPolje(visina - 1, j, ZID);
+        }
+    }
+
+    void staviHranu() {
+        int x, y;
+        do {
+            x = rand() % (visina - 2) + 1;
+            y = rand() % (sirina - 2) + 1;
+        } while (dajPolje(x, y) != PRAZNO);
+        staviPolje(x, y, HRANA);
     }
 };
 
@@ -70,27 +90,10 @@ char dajKarakter(int value) {
     }
 }
 
-void praviHranu() {
-    int x;
-    int y;
-    do {
-        x = rand() % (mapa.visina - 2) + 1;
-        y = rand() % (mapa.sirina - 2) + 1;
-    } while (mapa.dajPolje(x, y) != PRAZNO);
-    mapa.postaviPolje(x, y, HRANA);
-}
-
 void initMap() {
-    mapa.postaviPolje(zmija.x, zmija.y, ZMIJA);
-    for (int x = 0; x < mapa.visina; ++x) {
-        mapa.polja[x] = ZID;
-        mapa.postaviPolje(x, mapa.sirina - 1, ZID);
-    }
-    for (int y = 0; y < mapa.sirina; y++) {
-        mapa.postaviPolje(0, y, ZID);
-        mapa.postaviPolje(mapa.visina - 1, y, ZID);
-    }
-    praviHranu();
+    mapa.praviZidove();
+    mapa.staviPolje(zmija.x, zmija.y, ZMIJA);
+    mapa.staviHranu();
 }
 
 void crtaj() {
@@ -107,13 +110,13 @@ void mrdajZmiju(int dx, int dy) {
     int y = zmija.y + dy;
     if (mapa.dajPolje(x, y) == HRANA) {
         zmija.duzina++;
-        praviHranu();
+        mapa.staviHranu();
     } else if (mapa.dajPolje(x, y) != PRAZNO) {
         igra_ide = false;
     }
     zmija.x = x;
     zmija.y = y;
-    mapa.postaviPolje(x, y, zmija.duzina + 1); // povecava broj glavi zmije
+    mapa.staviPolje(x, y, zmija.duzina + 1); // povecava broj glavi zmije
 }
 
 void azurirajZmiju() {
