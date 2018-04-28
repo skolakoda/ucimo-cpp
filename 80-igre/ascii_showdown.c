@@ -1,4 +1,5 @@
-/* ASCII Showdown, made by: Shivam Shekhar */
+// ASCII Showdown, made by: Shivam Shekhar
+// samo za windows
 
 #include <stdio.h>
 #include <windows.h>

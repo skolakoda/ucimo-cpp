@@ -1,4 +1,4 @@
-// https://codereview.stackexchange.com/questions/66481/snake-game-in-c
+// samo za windows
 #include <iostream>
 #include <conio.h>
 

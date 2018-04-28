@@ -1,3 +1,4 @@
+// samo za windows platformu
 #include <iostream>
 #include <windows.h>
 #include <conio.h>
