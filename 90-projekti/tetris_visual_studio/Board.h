@@ -12,18 +12,17 @@ const int MIN_VERTICAL_MARGIN = 20;		// Minimum vertical margin for the board li
 const int MIN_HORIZONTAL_MARGIN = 20;	// Minimum horizontal margin for the board limit
 const int PIECE_BLOCKS = 5;				// Number of horizontal and vertical blocks of a matrix piece
 
-
 class Board
 {
 public:
-	Board						(Pieces *pPieces, int pScreenHeight);
-	int GetXPosInPixels			(int pPos);
-	int GetYPosInPixels			(int pPos);
-	bool IsFreeBlock			(int pX, int pY);
-	bool IsPossibleMovement		(int pX, int pY, int pPiece, int pRotation);
-	void StorePiece				(int pX, int pY, int pPiece, int pRotation);
-	void DeletePossibleLines	();
-	bool IsGameOver				();
+	Board(Pieces *pPieces, int pScreenHeight);
+	int GetXPosInPixels(int pPos);
+	int GetYPosInPixels(int pPos);
+	bool IsPosFree(int pX, int pY);
+	bool IsPossibleMovement(int pX, int pY, int pPiece, int pRotation);
+	void StorePiece(int pX, int pY, int pPiece, int pRotation);
+	void DeletePossibleLines();
+	bool IsGameOver();
 
 private:
 	enum { POS_FREE, POS_FILLED };
@@ -31,7 +30,11 @@ private:
 	Pieces *mPieces;
 	int mScreenHeight;
 	void InitBoard();
-	void DeleteLine (int pY);
+	void DeleteLine(int pY);
+	bool IsOutOfBounds(int pX, int pY);
+	bool IsEmptyPart(int pPiece, int pRotation, int j2, int i2);
+	bool IsCollision(int pPiece, int pRotation, int j2, int i2, int i1, int j1);
+	bool IsPosFilled(int pX, int pY);
 };
 
 #endif // _BOARD_

@@ -93,7 +93,7 @@ void Game::DrawBoard ()
 		for (int j = 0; j < BOARD_HEIGHT; j++)
 		{	
 			// Check if the block is filled, if so, draw it
-			if (!mBoard->IsFreeBlock(i, j))	
+			if (!mBoard->IsPosFree(i, j))	
 				mIO->DrawRectangle (	mX1 + i * BLOCK_SIZE, 
 										mY + j * BLOCK_SIZE, 
 										(mX1 + i * BLOCK_SIZE) + BLOCK_SIZE - 1, 
