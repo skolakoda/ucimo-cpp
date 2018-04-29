@@ -11,14 +11,12 @@ int WINAPI WinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 int main()
 #endif
 {
-	// Class for drawing staff, it uses SDL for the rendering
-	IO mIO;
+	IO mIO;	// for rendering
 	int mScreenHeight = mIO.GetScreenHeight();
 	Pieces mPieces;
 	Board mBoard (&mPieces, mScreenHeight);
 	Game mGame (&mBoard, &mPieces, &mIO, mScreenHeight);
-	// Get the actual clock milliseconds (SDL)
-	unsigned long mTime1 = SDL_GetTicks();
+	unsigned long mTime1 = SDL_GetTicks();	// in milliseconds
 
 	// ----- Main Loop -----
 	while (!mIO.IsKeyDown (SDLK_ESCAPE))

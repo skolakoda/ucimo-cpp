@@ -15,22 +15,16 @@ void Board::InitBoard()
 			mBoard[i][j] = POS_FREE;
 }
 
-/* 
-Parameters:
->> pX:		Horizontal position in blocks
->> pY:		Vertical position in blocks
->> pPiece:	Piece to draw
->> pRotation:	1 of the 4 possible rotations
-*/
+
 void Board::StorePiece (int pX, int pY, int pPiece, int pRotation)
 {
-	for (int i1 = pX, i2 = 0; i1 < pX + PIECE_BLOCKS; i1++, i2++)
+	for (int i = pX, i2 = 0; i < pX + PIECE_BLOCKS; i++, i2++)
 	{
-		for (int j1 = pY, j2 = 0; j1 < pY + PIECE_BLOCKS; j1++, j2++)
+		for (int j = pY, j2 = 0; j < pY + PIECE_BLOCKS; j++, j2++)
 		{	
 			// Store only the blocks of the piece that are not holes
 			if (mPieces->GetBlockType (pPiece, pRotation, j2, i2) != 0)		
-				mBoard[i1][j1] = POS_FILLED;	
+				mBoard[i][j] = POS_FILLED;	
 		}
 	}
 }
@@ -38,7 +32,6 @@ void Board::StorePiece (int pX, int pY, int pPiece, int pRotation)
 
 bool Board::IsGameOver()
 {
-	//If the first line has blocks, then, game over
 	for (int i = 0; i < BOARD_WIDTH; i++)
 	{
 		if (mBoard[i][0] == POS_FILLED) return true;
@@ -47,10 +40,6 @@ bool Board::IsGameOver()
 }
 
 
-/* 			
-Parameters:
->> pY:		Vertical position in blocks of the line to delete
-*/
 void Board::DeleteLine (int pY)
 {
 	// Moves all the upper lines one row down
@@ -99,23 +88,19 @@ int Board::GetYPosInPixels (int pPos)
 
 bool Board::IsPossibleMovement (int pX, int pY, int pPiece, int pRotation)
 {
-	// Checks collision with pieces already stored in the board or the board limits
-	for (int i1 = pX, i2 = 0; i1 < pX + PIECE_BLOCKS; i1++, i2++)
+	for (int i = pX, i2 = 0; i < pX + PIECE_BLOCKS; i++, i2++)
 	{
-		for (int j1 = pY, j2 = 0; j1 < pY + PIECE_BLOCKS; j1++, j2++)
+		for (int j = pY, j2 = 0; j < pY + PIECE_BLOCKS; j++, j2++)
 		{	
-			// Check if the piece is outside the limits of the board
-			if (i1 < 0 || i1 > BOARD_WIDTH - 1 || j1 > BOARD_HEIGHT - 1)
+			if (i < 0 || i > BOARD_WIDTH - 1 || j > BOARD_HEIGHT - 1)
 			{
 				if (mPieces->GetBlockType (pPiece, pRotation, j2, i2) != 0)
 					return 0;		
 			}
-
-			// Check if the piece have collisioned with a block already stored in the map
-			if (j1 >= 0)	
+			if (j >= 0)	
 			{
 				if ((mPieces->GetBlockType (pPiece, pRotation, j2, i2) != 0) &&
-					(!IsFreeBlock (i1, j1))	)
+					(!IsFreeBlock (i, j))	)
 					return false;
 			}
 		}
