@@ -306,3 +306,13 @@ int Pieces::GetYInitialPosition (int pPiece, int pRotation)
 {
 	return mPiecesInitialPosition [pPiece][pRotation][1];
 }
+
+bool Pieces::IsEmptyPart(int pPiece, int pRotation, int pX, int pY)
+{
+	return GetBlockType(pPiece, pRotation, pX, pY) == 0;
+}
+
+bool Pieces::IsPivot(int pPiece, int pRotation, int pX, int pY)
+{
+	return GetBlockType(pPiece, pRotation, pX, pY) == 2;
+}

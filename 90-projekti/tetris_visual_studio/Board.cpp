@@ -92,9 +92,9 @@ bool Board::IsPosFree(int pX, int pY)
 	return mBoard[pX][pY] == POS_FREE;
 }
 
-bool Board::IsEmptyPart(int pPiece, int pRotation, int j2, int i2)
+bool Board::IsEmptyPart(int pPiece, int pRotation, int pX, int pY)
 {
-	return mPieces->GetBlockType(pPiece, pRotation, j2, i2) == 0;
+	return mPieces->IsEmptyPart(pPiece, pRotation, pX, pY);
 }
 
 bool Board::IsOutOfBounds(int pX, int pY)

@@ -13,24 +13,22 @@ class Game
 {
 public:
 	Game (Board *pBoard, Pieces *pPieces, IO *pIO, int pScreenHeight);
-
 	void DrawScene ();
 	void CreateNewPiece ();
-
 	int mPosX, mPosY;
 	int mPiece, mRotation;
 
 private:
-	int mScreenHeight;
-	int mNextPosX, mNextPosY;
-	int mNextPiece, mNextRotation;
-
 	Board *mBoard;
 	Pieces *mPieces;
 	IO *mIO;
-
+	int mScreenHeight;
+	int mNextPosX, mNextPosY;
+	int mNextPiece, mNextRotation;
 	int GetRand (int pA, int pB);
 	void InitGame();
+	void InitFirstPiece(int pPiece, int pRotation);
+	void InitNextPiece();
 	void DrawPiece (int pX, int pY, int pPiece, int pRotation);
 	void DrawBoard ();
 };

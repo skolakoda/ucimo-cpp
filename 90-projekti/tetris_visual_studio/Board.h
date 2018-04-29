@@ -32,7 +32,7 @@ private:
 	void InitBoard();
 	void DeleteLine(int pY);
 	bool IsOutOfBounds(int pX, int pY);
-	bool IsEmptyPart(int pPiece, int pRotation, int j2, int i2);
+	bool IsEmptyPart(int pPiece, int pRotation, int pX, int pY);
 	bool IsCollision(int pPiece, int pRotation, int j2, int i2, int i1, int j1);
 	bool IsPosFilled(int pX, int pY);
 };
