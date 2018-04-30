@@ -43,4 +43,3 @@ http://jeanpetric.github.io/2016/03/30/simple-game-development-using-c-and-sdl.h
 
 http://javilop.com/gamedev/tetris-tutorial-in-c-platform-independent-focused-in-game-logic-for-beginners/
 https://github.com/caioteixeira/Asteroids
-https://www.codemiles.com/c-opengl-examples/
