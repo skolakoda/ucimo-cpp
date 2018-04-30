@@ -1,7 +1,8 @@
 # Učimo C++
 
-C++ tutorijal:
-https://www.sololearn.com/Play/CPlusPlus
+Vežbe i primeri za programski jezik C++. Neki primeri su platformski specifični, samo za Win ili Linux.
+
+Takođe, pogledaj dobar C++ tutorijal: https://www.sololearn.com/Play/CPlusPlus
 
 ## Kompajliranje
 
