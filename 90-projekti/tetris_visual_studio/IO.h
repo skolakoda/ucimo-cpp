@@ -13,7 +13,6 @@
 
 enum color {BLACK, RED, GREEN, BLUE, CYAN, MAGENTA, YELLOW, WHITE, COLOR_MAX};
 
-
 class IO
 {
 public:
