@@ -41,5 +41,4 @@ http://wiki.codeblocks.org/index.php/Creating_a_new_project
 
 http://jeanpetric.github.io/2016/03/30/simple-game-development-using-c-and-sdl.html
 
-http://javilop.com/gamedev/tetris-tutorial-in-c-platform-independent-focused-in-game-logic-for-beginners/
 https://github.com/caioteixeira/Asteroids
