@@ -2,7 +2,7 @@
 
 Vežbe i primeri za programski jezik C++. Neki primeri su platformski specifični, samo za Win ili Linux.
 
-Dobar C++ tutorijal: https://www.sololearn.com/Play/CPlusPlus
+Vidi još: https://github.com/skolakoda/ucimo-opengl
 
 ## Kompajliranje
 
