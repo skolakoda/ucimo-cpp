@@ -24,6 +24,12 @@ Komanda za imenovani izlazni fajl je:
 g++ zdravo.cpp -o zdravo
 ```
 
+Ukoliko program koristi neku biblioteku, npr. OpenGL, potrebno je instalirati biblioteku, te dodati opcije prevodioca:
+
+```
+gcc ime-fajla.cpp -o ime-fajla -lGL -lGLU -lglut
+```
+
 ## Projekti
 
 Unutar repozitorija se nalazi nekoliko projekata, za čije pokretanje je potrebno odgovarajuće razvojno okruženje (IDE): Code Blocks, Visual Studio i slično.
