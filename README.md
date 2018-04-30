@@ -32,9 +32,9 @@ gcc ime-fajla.cpp -o ime-fajla -lGL -lGLU -lglut
 
 ## Projekti
 
-Unutar repozitorija se nalazi nekoliko projekata, za čije pokretanje je potrebno odgovarajuće razvojno okruženje (IDE): Code Blocks, Visual Studio i slično.
+Unutar repozitorija se nalazi nekoliko projekata, za čije pokretanje je potrebno odgovarajuće razvojno okruženje (IDE): Code Blocks ili Visual Studio.
 
-Vidi takođe uputstvo za pravljenje C++ projekta u Code Blocks editoru:
+Vidi uputstvo za pravljenje C++ projekta u Code Blocks editoru:
 http://wiki.codeblocks.org/index.php/Creating_a_new_project
 
 ## Linkovi
