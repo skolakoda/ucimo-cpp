@@ -24,16 +24,12 @@ Komanda za imenovani izlazni fajl je:
 g++ zdravo.cpp -o zdravo
 ```
 
-## Code Blocks
+## Projekti
 
-Mini projekat koji se nalazi u repozitoriju otvoriti u Code Blocks editoru i odatle ga kompajlirati i pokrenuti.
+Unutar repozitorija se nalazi nekoliko projekata, za čije pokretanje je potrebno odgovarajuće razvojno okruženje (IDE): Code Blocks, Visual Studio i slično.
 
-Uputstvo za pravljenje C++ projekta u Code Blocks editoru:
+Vidi takođe uputstvo za pravljenje C++ projekta u Code Blocks editoru:
 http://wiki.codeblocks.org/index.php/Creating_a_new_project
-
-## TODO
-
-- C++ events
 
 ## Linkovi
 
