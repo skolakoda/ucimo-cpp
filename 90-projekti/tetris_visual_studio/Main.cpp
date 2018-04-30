@@ -11,74 +11,66 @@ int WINAPI WinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 int main()
 #endif
 {
-	IO mIO;	// for rendering
+	IO mIO;
 	int mScreenHeight = mIO.GetScreenHeight();
 	Pieces mPieces;
 	Board mBoard (&mPieces, mScreenHeight);
 	Game mGame (&mBoard, &mPieces, &mIO, mScreenHeight);
-	unsigned long mTime1 = SDL_GetTicks();	// in milliseconds
+	unsigned long mTime1 = SDL_GetTicks();
 
-	// ----- Main Loop -----
+	// Main Loop
 	while (!mIO.IsKeyDown (SDLK_ESCAPE))
 	{
-		// ----- Draw -----
-		mIO.ClearScreen (); 		// Clear screen
-		mGame.DrawScene ();			// Draw staff
-		mIO.UpdateScreen ();		// Put the graphic context in the screen
+		mIO.ClearScreen ();
+		mGame.DrawScene ();
+		mIO.UpdateScreen ();
 
-		// ----- Input -----
 		switch (mIO.Pollkey())
 		{
 			case (SDLK_RIGHT): 
 			{
-				if (mBoard.IsPossibleMovement (mGame.mPosX + 1, mGame.mPosY, mGame.mPiece, mGame.mRotation))
+				if (mBoard.IsPossibleMove(mGame.mPosX + 1, mGame.mPosY, mGame.mPiece, mGame.mRotation))
 					mGame.mPosX++;
 				break;
 			}
-
 			case (SDLK_LEFT): 
 			{
-				if (mBoard.IsPossibleMovement (mGame.mPosX - 1, mGame.mPosY, mGame.mPiece, mGame.mRotation))
+				if (mBoard.IsPossibleMove(mGame.mPosX - 1, mGame.mPosY, mGame.mPiece, mGame.mRotation))
 					mGame.mPosX--;	
 				break;
 			}
-
 			case (SDLK_DOWN):
 			{
-				if (mBoard.IsPossibleMovement (mGame.mPosX, mGame.mPosY + 1, mGame.mPiece, mGame.mRotation))
+				if (mBoard.IsPossibleMove(mGame.mPosX, mGame.mPosY + 1, mGame.mPiece, mGame.mRotation))
 					mGame.mPosY++;	
 				break;
 			}
-
 			case (SDLK_SPACE):
 			{
-				if (mBoard.IsPossibleMovement (mGame.mPosX, mGame.mPosY, mGame.mPiece, (mGame.mRotation + 1) % 4))
+				if (mBoard.IsPossibleMove(mGame.mPosX, mGame.mPosY, mGame.mPiece, (mGame.mRotation + 1) % 4))
 					mGame.mRotation = (mGame.mRotation + 1) % 4;
 				break;
 			}
 		}
 
-		// ----- Vertical movement -----
-		if (SDL_GetTicks() - mTime1 > WAIT_TIME)
-		{
-			if (mBoard.IsPossibleMovement (mGame.mPosX, mGame.mPosY + 1, mGame.mPiece, mGame.mRotation))
-			{
-				mGame.mPosY++;
-			}
-			else
-			{
-				mBoard.StorePiece (mGame.mPosX, mGame.mPosY, mGame.mPiece, mGame.mRotation);
-				mBoard.DeletePossibleLines ();
-				if (mBoard.IsGameOver())
-				{
-					mIO.Getkey();
-					exit(0);
-				}
-				mGame.CreateNewPiece();
-			}
-			mTime1 = SDL_GetTicks();
-		}
-	}
+		if (SDL_GetTicks() - mTime1 < WAIT_TIME) continue;
 
+		if (mBoard.IsPossibleMove(mGame.mPosX, mGame.mPosY + 1, mGame.mPiece, mGame.mRotation))
+		{
+			mGame.mPosY++; // falling
+		}
+		else
+		{
+			mBoard.StorePiece(mGame.mPosX, mGame.mPosY, mGame.mPiece, mGame.mRotation);
+			mBoard.DeletePossibleLines();
+			if (mBoard.IsGameOver())
+			{
+				mIO.Getkey();
+				exit(0);
+			}
+			mGame.CreateNewPiece();
+		}
+		mTime1 = SDL_GetTicks();
+	}
 	return 0;
 }

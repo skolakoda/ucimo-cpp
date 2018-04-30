@@ -66,7 +66,7 @@ int Board::GetYPosInPixels (int pPos)
 	return mScreenHeight - BLOCK_SIZE * BOARD_HEIGHT + pPos * BLOCK_SIZE;
 }
 
-bool Board::IsPossibleMovement(int pX, int pY, int pPiece, int pRotation)
+bool Board::IsPossibleMove(int pX, int pY, int pPiece, int pRotation)
 {
 	for (int i1 = pX, i2 = 0; i1 < pX + PIECE_BLOCKS; i1++, i2++)
 		for (int j1 = pY, j2 = 0; j1 < pY + PIECE_BLOCKS; j1++, j2++)
