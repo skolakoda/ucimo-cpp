@@ -1,4 +1,4 @@
-// samo za windows
+// za windows
 #include <iostream>
 #include <conio.h>
 

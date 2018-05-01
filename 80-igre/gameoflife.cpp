@@ -1,5 +1,5 @@
 // https://github.com/hasit/gameoflife
-// radi na linuxu
+// za linux
 #include <iostream>
 #include <stdlib.h>
 #include <unistd.h>
