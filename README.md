@@ -1,8 +1,12 @@
 # Učimo C++
 
-Vežbe i primeri za programski jezik C++. Neki primeri su platformski specifični, samo za Win ili Linux.
+Vežbe i primeri za programski jezik C++. Napomena: Neki primeri su platformski specifični, samo za Win ili Linux.
 
-Vidi još: https://github.com/skolakoda/ucimo-opengl
+Korisni tutorijali:
+
+- [C++ Tutorial (SoloLearn)](https://www.sololearn.com/Course/CPlusPlus/)
+
+Vidi još: [Učimo C](https://github.com/skolakoda/ucimo-c) i [Učimo OpenGL](https://github.com/skolakoda/ucimo-opengl).
 
 ## Kompajliranje
 
