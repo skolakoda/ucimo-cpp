@@ -5,7 +5,7 @@ Vežbe i primeri za programski jezik C++. Korisni tutorijali:
 - [C++ Tutorial (SoloLearn)](https://www.sololearn.com/Course/CPlusPlus/)
 
 
-Neki primeri su platformski specifični, samo za Win ili Linux.
+Napomena: Neki primeri su platformski specifični, samo za Win ili Linux.
 
 Vidi još: [Učimo C](https://github.com/skolakoda/ucimo-c) i [Učimo OpenGL](https://github.com/skolakoda/ucimo-opengl).
 
