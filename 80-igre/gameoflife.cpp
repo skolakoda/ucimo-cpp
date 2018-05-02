@@ -3,13 +3,11 @@
 #include <iostream>
 #include <stdlib.h>
 #include <unistd.h>
-
-#define LIVE 79
-#define DEAD 46
-
-#define GNUM 40
-
 using namespace std;
+
+const int LIVE = 79;
+const int DEAD = 46;
+const int GNUM = 40;
 
 class GameOfLife
 {
