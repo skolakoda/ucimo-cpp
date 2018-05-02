@@ -17,13 +17,13 @@ enum color {BLACK, RED, GREEN, BLUE, CYAN, MAGENTA, YELLOW, WHITE, COLOR_MAX};
 
 class IO
 {
-public:
-	IO						();
-	void DrawRectangle		(int pX1, int pY1, int pX2, int pY2, enum color pC);
-	void ClearScreen		();
-	int Pollkey				();
-	int IsKeyDown			(int pKey);
-	void UpdateScreen		();
-private:
-	SDL_Surface * screen;
+	SDL_Surface *screen;
+	Uint32 colors[COLOR_MAX] = {0x000000ff, 0xff0000ff, 0x00ff00ff, 0x0000ffff, 0x00ffffff, 0xff00ffff, 0xffff00ff, 0xffffffff};
+	public:
+		IO						();
+		void DrawRectangle		(int pX1, int pY1, int pX2, int pY2, enum color pC);
+		void ClearScreen		();
+		int Pollkey				();
+		int IsKeyDown			(int pKey);
+		void UpdateScreen		();
 };

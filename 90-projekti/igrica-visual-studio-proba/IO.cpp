@@ -1,9 +1,5 @@
 #include "IO.h"
 
-Uint32 colors [COLOR_MAX] = {
-	0x000000ff, 0xff0000ff, 0x00ff00ff, 0x0000ffff, 0x00ffffff, 0xff00ffff, 0xffff00ff, 0xffffffff
-};
-
 IO::IO() 
 {
 	Uint32 videoflags = SDL_SWSURFACE | SDL_DOUBLEBUF;

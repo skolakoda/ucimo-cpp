@@ -5,15 +5,14 @@ enum Smer { LEVO, DESNO, GORE, DOLE };
 
 class Kocka
 {
-public:
+	IO mIO;
+	Smer smer = DESNO;
 	int x = 0;
 	int y = 0;
 	int sirina = 200;
 	int visina = 200;
-	Smer smer = DESNO;
-	IO mIO;
-
-	void unos();
-	void azuriraj();
-	void crtaj();
+	public:
+		void unos();
+		void azuriraj();
+		void crtaj();
 };
