@@ -9,14 +9,14 @@
 const int WAIT_TIME = 1000 / 60;
 
 #ifndef LINUX
-int WINAPI WinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)	// Linux users should quit this line
+int WINAPI WinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 #else
 int main()
 #endif
 {
 	IO mIO;
 	Kocka kocka;
-	unsigned long mTime = SDL_GetTicks();
+	unsigned long time = SDL_GetTicks();
 
 	while (!mIO.IsKeyDown (SDLK_ESCAPE))
 	{
@@ -25,11 +25,10 @@ int main()
 		kocka.crtaj();
 		mIO.UpdateScreen();
 
-		if (SDL_GetTicks() - mTime > WAIT_TIME) {
+		if (SDL_GetTicks() - time > WAIT_TIME) {
 			kocka.azuriraj();
-			mTime = SDL_GetTicks();
+			time = SDL_GetTicks();
 		}
 	}
-
 	return 0;
 }
