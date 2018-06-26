@@ -3,20 +3,23 @@
 class Junak {
   public:
     void zdravo() {
-      std::cout << "Zdravo!";
+      std::cout << "Zdravo!" << std::endl;
     }
 };
+
+// ork nasledjuje junaka i gazi njegovu metodu
 
 class Ork : public Junak {
   public:
     void zdravo() {
-      std::cout << "Arghhh!";
+      std::cout << "Arghhh!" << std::endl;
     }
 };
 
-int main(int argc, char const *argv[]) {
+int main() {
   Junak igrac;
-  igrac.zdravo();
   Ork neprijatelj;
+
+  igrac.zdravo();
   neprijatelj.zdravo();
 }

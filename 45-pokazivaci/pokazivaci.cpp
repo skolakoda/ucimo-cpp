@@ -1,13 +1,10 @@
 #include <iostream>
 
 int main(){
-    int number = 3;
-    std::cout << "number is initialized with a value of " << number << "\n";
+    int broj = 3;
+    std::cout << "Vrednost varijable broj je " << broj << "\n";
 
-    number = number * 2;
-    std::cout << "After modifying number, its value is now " << number << "\n";
-
-    std::cout << "The number variable's value lives at memory address " << &number << "\n";
+    std::cout << "Adresa varijable broj je " << &broj << "\n";
 
     return 0;
 }

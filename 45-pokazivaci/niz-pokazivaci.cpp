@@ -1,22 +1,16 @@
 #include <iostream>
-
 using namespace std;
-const int MAX = 3;
+
+const int DUZINA = 3;
 
 int main () {
-   int niz[MAX] = {10, 100, 200};
-   int *ptr;
-   ptr = niz; // array address in pointer
+   int niz[DUZINA] = {10, 100, 200};
+   int *pokazivac = niz; // adresa niza
 
-   for (int i = 0; i < MAX; i++) {
-      cout << "Value of niz[" << i << "] = ";
-      cout << *ptr << endl;
-
-      cout << "Address of niz[" << i << "] = ";
-      cout << ptr << endl;
-
-      // prelazi na sledecu adresu (razmaci adresa za int su 4)
-      ptr++;
+   for (int i = 0; i < DUZINA; i++) {
+      cout << "Vrednost niz[" << i << "] je " << *pokazivac << endl;
+      cout << "Adresa niz[" << i << "] je " << pokazivac << endl;
+      pokazivac++;  // povecava adresu (razmaci adresa za int su 4)
    }
 
    return 0;

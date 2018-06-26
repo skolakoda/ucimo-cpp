@@ -7,9 +7,8 @@ int main () {
    int *pokazivac;
    pokazivac = &broj;
 
-   cout << "Value of broj: " << broj << endl;
-   cout << "Value of pokazivac: " << pokazivac << endl;
-   cout << "Value of *pokazivac: " << *pokazivac << endl;
+   cout << "Vrednost pokazivac je " << pokazivac << endl;
+   cout << "Vrednost *pokazivac je " << *pokazivac << endl;
 
    return 0;
 }

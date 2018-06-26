@@ -1,15 +1,14 @@
 #include <iostream>
-
 using namespace std;
-int main () {
-   int  var1;
-   char var2[10];
 
-   cout << "Address of var1 variable: ";
-   cout << &var1 << endl;
+int main()
+{
+  // varijable nemaju vrednost ali imaju adrese
+  int var1;
+  char var2[10];
 
-   cout << "Address of var2 variable: ";
-   cout << &var2 << endl;
+  cout << "Adresa var1: " << &var1 << endl;
+  cout << "Adresa var2: " << &var2 << endl;
 
-   return 0;
+  return 0;
 }

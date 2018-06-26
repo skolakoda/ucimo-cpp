@@ -3,13 +3,13 @@ using namespace std;
 
 int main()
 {
-    cout << "char: " << sizeof(char) << " byte" << endl;
-    cout << "int: " << sizeof(int) << " bytes" << endl;
-    cout << "float: " << sizeof(float) << " bytes" << endl;
-    cout << "double: " << sizeof(double) << " bytes" << endl;
+    cout << "char: " << sizeof(char) << " bajt" << endl;
+    cout << "int: " << sizeof(int) << " bajta" << endl;
+    cout << "float: " << sizeof(float) << " bajta" << endl;
+    cout << "double: " << sizeof(double) << " bajta" << endl;
 
-    int var = 50;
-    cout << "Velicina varijable je: " << sizeof(var) << endl;
+    int broj = 50;
+    cout << "Velicina celobrojne varijable je: " << sizeof(broj) << endl;
 
     return 0;
 }

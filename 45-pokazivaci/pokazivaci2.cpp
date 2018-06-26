@@ -1,13 +1,13 @@
 #include <iostream>
 
 int main(){
-    int number = 3;
+    int broj = 3;
+    int *pokazivac;
 
-    int *numberPointer;
-    std::cout << "Empty numberPointer points to the memory address " << numberPointer << ".\n";
+    std::cout << "Prazan pokazivac pokazuje na memorijsku adresu " << pokazivac << ".\n";
 
-    numberPointer = &number;
-    std::cout << "The numberPointer now points to the memory address `" << numberPointer << "`, which is the memory address of number\n";
+    pokazivac = &broj;
+    std::cout << "Pokazivac sada pokazuje na " << pokazivac << ", memorijsku adresu varijable broj.\n";
 
     return 0;
 }

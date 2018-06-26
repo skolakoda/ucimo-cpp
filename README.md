@@ -46,3 +46,7 @@ http://wiki.codeblocks.org/index.php/Creating_a_new_project
 http://jeanpetric.github.io/2016/03/30/simple-game-development-using-c-and-sdl.html
 
 https://github.com/caioteixeira/Asteroids
+
+ima animacija pri dnu strane:
+
+https://biljanaivanovic.wordpress.com/category/dev-c/zadaci-za-vezbanje/page/1/

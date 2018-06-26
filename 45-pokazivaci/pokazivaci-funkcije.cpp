@@ -24,7 +24,7 @@ int main(){
 
     x = 3;
     setValueToFiveWithReference(x);
-    std::cout << "The value of x is " << x << ", setPointerValueToFive() modified x.\n";
+    std::cout << "The value of x is " << x << ", setValueToFiveWithReference() modified x.\n";
 
     return 0;
 }
